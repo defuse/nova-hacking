@@ -1,22 +1,22 @@
 //! This library implements Nova, a high-speed recursive SNARK.
 #![deny(
-  warnings,
-  unused,
+  //warnings,
+  //unused,
   future_incompatible,
   nonstandard_style,
   rust_2018_idioms,
-  missing_docs
+  // missing_docs
 )]
 #![allow(non_snake_case)]
 #![allow(clippy::type_complexity)]
 #![forbid(unsafe_code)]
 
 // private modules
-mod bellperson;
+pub mod bellperson;
 mod circuit;
 mod constants;
 mod nifs;
-mod r1cs;
+pub mod r1cs;
 
 // public modules
 pub mod errors;
@@ -40,7 +40,7 @@ use gadgets::utils::scalar_as_base;
 use nifs::NIFS;
 use r1cs::{R1CSInstance, R1CSShape, R1CSWitness, RelaxedR1CSInstance, RelaxedR1CSWitness};
 use serde::{Deserialize, Serialize};
-use traits::{
+pub use traits::{
   circuit::StepCircuit,
   commitment::{CommitmentEngineTrait, CommitmentTrait},
   snark::RelaxedR1CSSNARKTrait,
@@ -776,10 +776,10 @@ where
   }
 }
 
-type CommitmentKey<G> = <<G as traits::Group>::CE as CommitmentEngineTrait<G>>::CommitmentKey;
-type Commitment<G> = <<G as Group>::CE as CommitmentEngineTrait<G>>::Commitment;
-type CompressedCommitment<G> = <<<G as Group>::CE as CommitmentEngineTrait<G>>::Commitment as CommitmentTrait<G>>::CompressedCommitment;
-type CE<G> = <G as Group>::CE;
+pub type CommitmentKey<G> = <<G as traits::Group>::CE as CommitmentEngineTrait<G>>::CommitmentKey;
+pub type Commitment<G> = <<G as Group>::CE as CommitmentEngineTrait<G>>::Commitment;
+pub type CompressedCommitment<G> = <<<G as Group>::CE as CommitmentEngineTrait<G>>::Commitment as CommitmentTrait<G>>::CompressedCommitment;
+pub type CE<G> = <G as Group>::CE;
 
 #[cfg(test)]
 mod tests {

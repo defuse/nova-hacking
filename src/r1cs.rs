@@ -42,7 +42,7 @@ pub struct R1CSShape<G: Group> {
 /// A type that holds a witness for a given R1CS instance
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct R1CSWitness<G: Group> {
-  W: Vec<G::Scalar>,
+  pub W: Vec<G::Scalar>,
 }
 
 /// A type that holds an R1CS instance
@@ -56,8 +56,8 @@ pub struct R1CSInstance<G: Group> {
 /// A type that holds a witness for a given Relaxed R1CS instance
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RelaxedR1CSWitness<G: Group> {
-  pub(crate) W: Vec<G::Scalar>,
-  pub(crate) E: Vec<G::Scalar>,
+  pub W: Vec<G::Scalar>,
+  pub E: Vec<G::Scalar>,
 }
 
 /// A type that holds a Relaxed R1CS instance

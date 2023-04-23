@@ -24,9 +24,9 @@ pub struct AllocatedPoint<G>
 where
   G: Group,
 {
-  pub(crate) x: AllocatedNum<G::Base>,
-  pub(crate) y: AllocatedNum<G::Base>,
-  pub(crate) is_infinity: AllocatedNum<G::Base>,
+  pub x: AllocatedNum<G::Base>,
+  pub y: AllocatedNum<G::Base>,
+  pub is_infinity: AllocatedNum<G::Base>,
 }
 
 impl<G> AllocatedPoint<G>
@@ -747,8 +747,8 @@ where
   }
 }
 
-#[cfg(test)]
-mod tests {
+//#[cfg(test)]
+pub mod tests {
   use super::*;
   use crate::bellperson::{
     r1cs::{NovaShape, NovaWitness},
@@ -766,12 +766,11 @@ mod tests {
   where
     G: Group,
   {
-    x: G::Base,
-    y: G::Base,
-    is_infinity: bool,
+    pub x: G::Base,
+    pub y: G::Base,
+    pub is_infinity: bool,
   }
 
-  #[cfg(test)]
   impl<G> Point<G>
   where
     G: Group,
@@ -998,7 +997,7 @@ mod tests {
     assert!(shape.is_sat(&ck, &inst, &witness).is_ok());
   }
 
-  fn synthesize_add_equal<G, CS>(mut cs: CS) -> (AllocatedPoint<G>, AllocatedPoint<G>)
+  pub fn synthesize_add_equal<G, CS>(mut cs: CS) -> (AllocatedPoint<G>, AllocatedPoint<G>)
   where
     G: Group,
     CS: ConstraintSystem<G::Base>,
@@ -1012,6 +1011,7 @@ mod tests {
 
   #[test]
   fn test_ecc_circuit_add_equal() {
+    // AUDIT: copying this one
     // First create the shape
     let mut cs: ShapeCS<G2> = ShapeCS::new();
     let _ = synthesize_add_equal::<G1, _>(cs.namespace(|| "synthesize add equal"));
